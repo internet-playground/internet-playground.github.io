@@ -1378,6 +1378,7 @@
         };
 		
 const articleCache = new Map();
+const articleRequests = new Map();
 		
         const els = {
             header: document.getElementById("siteHeader"),
@@ -1557,31 +1558,61 @@ const articleCache = new Map();
 
 async function loadArticle(file, container) {
 
-    // Already loaded before?
+    // Already downloaded
     if (articleCache.has(file)) {
 
-        const html = articleCache.get(file);
-
-container.insertAdjacentHTML(
-    "beforeend",
-    html
-);
+        container.insertAdjacentHTML(
+            "beforeend",
+            articleCache.get(file)
+        );
 
         return;
     }
 
+    // Already downloading
+    if (articleRequests.has(file)) {
+
+        const html = await articleRequests.get(file);
+
+        container.insertAdjacentHTML(
+            "beforeend",
+            html
+        );
+
+        return;
+    }
+
+    // Start downloading only once
+    const request = fetch(file)
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error(`Failed to load ${file}`);
+            }
+
+            return response.text();
+
+        })
+        .then(html => {
+
+            articleCache.set(file, html);
+            articleRequests.delete(file);
+
+            return html;
+
+        })
+        .catch(error => {
+
+            articleRequests.delete(file);
+            throw error;
+
+        });
+
+    articleRequests.set(file, request);
+
     try {
 
-        const response = await fetch(file);
-
-        if (!response.ok) {
-            throw new Error();
-        }
-
-        const html = await response.text();
-
-        // Save for future use
-        articleCache.set(file, html);
+        const html = await request;
 
         container.insertAdjacentHTML(
             "beforeend",
