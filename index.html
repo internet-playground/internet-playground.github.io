@@ -1563,10 +1563,12 @@ async function loadArticle(file, container) {
             throw new Error();
         }
 
-        container.insertAdjacentHTML(
-            "beforeend",
-            await response.text()
-        );
+        const html = await response.text();
+
+container.insertAdjacentHTML(
+    "beforeend",
+    html
+);
 
     } catch {
 
