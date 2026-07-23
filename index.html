@@ -1376,7 +1376,9 @@
             os: new Set(),
             expandedId: null
         };
-
+		
+const articleCache = new Map();
+		
         const els = {
             header: document.getElementById("siteHeader"),
             search: document.getElementById("searchInput"),
@@ -1555,6 +1557,19 @@
 
 async function loadArticle(file, container) {
 
+    // Already loaded before?
+    if (articleCache.has(file)) {
+
+        const html = articleCache.get(file);
+
+container.insertAdjacentHTML(
+    "beforeend",
+    html
+);
+
+        return;
+    }
+
     try {
 
         const response = await fetch(file);
@@ -1565,10 +1580,13 @@ async function loadArticle(file, container) {
 
         const html = await response.text();
 
-container.insertAdjacentHTML(
-    "beforeend",
-    html
-);
+        // Save for future use
+        articleCache.set(file, html);
+
+        container.insertAdjacentHTML(
+            "beforeend",
+            html
+        );
 
     } catch {
 
