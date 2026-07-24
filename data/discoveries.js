@@ -10,7 +10,7 @@ const discoveries = [
                 types: ["Websites", "Interactive"],
                 platforms: ["Desktop", "Browser"],
                 os: ["Apple", "Windows"],
-                related: ["ai-fortune-lab", "button-that-should-not", "browser-rituals"],
+                related: ["ai-fortune-lab", "button-that-should-not", "browser-rituals", "photo-editors"],
                 accent: "#14f1d9"
             },
             {
@@ -146,6 +146,19 @@ const discoveries = [
             {
                 id: "browser-rituals",
                 title: "Browser Rituals",
+                teaser: "A collection of tiny web ceremonies for people who open too many tabs.",
+                description: "Spin a random ritual, generate a fake omen, archive a thought, or launch into another strange corner of the playground.",
+                image: "assets/previews/browser-rituals.png",
+                tags: ["Websites", "Weird", "AI"],
+                types: ["Websites", "Interactive"],
+                platforms: ["Mobile", "Desktop", "Browser"],
+                os: ["Android", "Apple", "Windows"],
+                related: ["tab-hypnosis", "glitch-kitchen", "ai-fortune-lab"],
+                accent: "#ffc857"
+            },
+			{
+                id: "photo-editors",
+                title: "Photo Editors",
                 teaser: "A collection of tiny web ceremonies for people who open too many tabs.",
                 description: "Spin a random ritual, generate a fake omen, archive a thought, or launch into another strange corner of the playground.",
                 image: "assets/previews/browser-rituals.png",
