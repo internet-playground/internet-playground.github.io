@@ -167,6 +167,6 @@ const discoveries = [
                 platforms: ["Mobile", "Desktop", "Browser"],
                 os: ["Android", "Apple", "Windows"],
                 related: ["tab-hypnosis", "glitch-kitchen", "ai-fortune-lab"],
-                accent: "#ffc857"
+                accent: "#ffffff"
             }
         ];
